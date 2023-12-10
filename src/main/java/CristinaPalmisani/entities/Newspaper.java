@@ -1,11 +1,9 @@
 package CristinaPalmisani.entities;
 
-import java.time.LocalDate;
-
 public class Newspaper extends Catalogo {
     private periodicity periodicity;
 
-    public Newspaper(String title, LocalDate year, int numberOfPage, String codeISBN, periodicity periodicity) {
+    public Newspaper(String title, String year, int numberOfPage, String codeISBN, periodicity periodicity) {
         super(title, year, numberOfPage, codeISBN);
         this.periodicity = periodicity;
     }

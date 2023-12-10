@@ -5,14 +5,14 @@ import java.time.LocalDate;
 public class Catalogo {
     private final String codeISBN;
     private final String title;
-    private final LocalDate year;
-    private final int numberOfPage;
+    private final String year;
+    private final int pages;
 
-    public Catalogo(String title, LocalDate year, int numberOfPage, String codeISBN) {
+    public Catalogo(String title, String year, int numberOfPage, String codeISBN) {
 
         this.title = title;
         this.year = year;
-        this.numberOfPage = numberOfPage;
+        this.pages = numberOfPage;
         this.codeISBN = codeISBN;
     }
 
@@ -22,7 +22,7 @@ public class Catalogo {
                 "codeISBN='" + codeISBN + '\'' +
                 ", title='" + title + '\'' +
                 ", year=" + year +
-                ", numberOfPage=" + numberOfPage;
+                ", numberOfPage=" + pages;
     }
 
     public String getCodeISBN() {
@@ -33,11 +33,11 @@ public class Catalogo {
         return title;
     }
 
-    public LocalDate getYear() {
+    public String getYear() {
         return year;
     }
 
     public int getNumberOfPage() {
-        return numberOfPage;
+        return pages;
     }
 }
