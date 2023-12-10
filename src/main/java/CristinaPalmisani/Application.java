@@ -54,7 +54,7 @@ public class Application {
                     query = input.nextLine();
                     result = library.findIsbn(query);
                     System.out.println("Result: ");
-                    result.forEach(item -> System.out.println(item.toString()));
+                    result.forEach(library -> System.out.println(library.toString()));
                     System.out.println("press enter to continue");
                     input.nextLine();
                     break;
@@ -71,7 +71,7 @@ public class Application {
                     System.out.println("Search by year");
                     query = input.nextLine().toLowerCase();
                     result = library.findAuthor(query);
-                    System.out.println("Result: ");
+                    System.out.println("Result: " + result);
                     result.forEach(item -> System.out.println(item.toString()));
                     System.out.println("press enter to continue");
                     input.nextLine();
@@ -86,6 +86,7 @@ public class Application {
                     input.nextLine();
                     break;
                 case 8:
+                    library.printIndex();
                     System.out.println(library.toString());
                     System.out.println("press enter to continue");
                     input.nextLine();
@@ -113,11 +114,13 @@ public class Application {
             }
 
             if (choice == 1){
+                System.out.println();
                 System.out.println(library.toString());
+                System.out.println();
                 System.out.println("Enter an ISBN (10 number)");
                 try {
                     isbn = input.nextLine();
-                    library.removeElement(isbn);
+                    library.rem(isbn);
                     System.out.println(library.toString());
                 } catch (Exception ex){
                     System.err.println("Wrong search filter!");
@@ -130,7 +133,7 @@ public class Application {
                     library.printIndex();
                     try {
                         choice = Integer.parseInt(input.nextLine());
-                        if (choice > 0) library.removeElement(String.valueOf(choice - 1));
+                        if (choice > 0) library.rem(choice - 1);
                     } catch (NumberFormatException ex){
                         System.err.println("Not a number");
                     }

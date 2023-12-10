@@ -15,34 +15,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Library {
-    private List<Catalogo> library = new ArrayList<>();
-    private static Logger log = LoggerFactory.getLogger(Library.class);
+    private List<Catalogo> library;
+    public Library(){
+        this.library =new ArrayList<>();
+    }
+    private static final Logger log = LoggerFactory.getLogger(Library.class);
 
     @Override
     public String toString() {
         return this.library.stream().map(Catalogo::toString).collect(Collectors.joining());
-    }
-    public void printIndex() {
-        for (int i = 0; i < this.library.size(); i++) {
-            System.out.print((i + 1) + " - " + this.library.get(i));
-        }
-    }
-    public void addElement(Catalogo element){
-        this.library.add(element);
-    }
-    public void removeElement(String isbn){
-        this.library = this.library.stream().filter(elem-> (!elem.getCodeISBN().equals(isbn))).toList();
-    }
-
-    public List<Catalogo> findIsbn(String filter){
-        return this.library.stream().filter(elem->(elem.getCodeISBN().contains(filter))).toList();
-    }
-    public List<Catalogo> findYear(String filter){
-        return this.library.stream().filter(elem->(elem.getYear().contains(filter))).toList();
-    }
-
-    public List<Catalogo> findAuthor(String filter){
-        return this.library.stream().filter(elem->(elem instanceof Book)).filter(book -> ((Book) book).getAuthor().toLowerCase().contains(filter)).toList();
     }
 
     public void save(){
@@ -76,6 +57,32 @@ public class Library {
             else list.add(gson.fromJson(elem, Newspaper.class));
         });
         this.library = list;
+    }
+    public void addElement(Catalogo element){
+        this.library.add(element);
+    }
+
+    public void printIndex() {
+        for (int i = 0; i < this.library.size(); i++) {
+            System.out.print((i + 1) + " - " + this.library.get(i));
+        }
+    }
+    public void rem(int index) {
+        if (index < this.library.size() && index >= 0) this.library.remove(index);
+    }
+    public void rem(String isbn) {
+        this.library = this.library.stream().filter(elm -> (!elm.getCodeISBN().equals(isbn))).toList();
+    }
+
+    public List<Catalogo> findIsbn(String filter){
+        return this.library.stream().filter(elem->(elem.getCodeISBN().contains(filter))).toList();
+    }
+    public List<Catalogo> findYear(String filter){
+        return this.library.stream().filter(elem->(elem.getYear().contains(filter))).toList();
+    }
+
+    public List<Catalogo> findAuthor(String filter){
+        return this.library.stream().filter(elem->(elem instanceof Book)).filter(book -> ((Book) book).getAuthor().toLowerCase().contains(filter)).toList();
     }
 
 
